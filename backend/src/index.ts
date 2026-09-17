@@ -11,6 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+import authRoutes from './routes/authRoutes';
+
+app.use('/api/auth', authRoutes);
+
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok', message: 'API is running' });
 });

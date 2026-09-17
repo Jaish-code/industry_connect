@@ -23,39 +23,74 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  studentProfile Student?
+  name         String?
+  profilePhoto String?
+
+  studentProfile  Student?
   industryProfile Industry?
 }
 
 model Student {
-  id              String   @id @default(uuid())
-  userId          String   @unique
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  firstName       String
-  lastName        String
-  phone           String?
-  location        String?
-  bio             String?
-  institution     String?
-  degree          String?
-  department      String?
-  graduationYear  Int?
-  cgpa            Float?
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id        String  @id @default(uuid())
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firstName String
+  lastName  String
+  phone     String?
+
+  // Location
+  location String?
+  city     String?
+  state    String?
+  country  String?
+  locality String?
+
+  bio String?
+
+  // Academic Information
+  institution    String?
+  degree         String?
+  department     String?
+  currentYear    String?
+  semester       String?
+  graduationYear Int?
+  cgpa           Float?
+
+  // Skills and Preferences (Simple JSON for MVP or array of strings, using String array in postgres)
+  skills              String[]
+  preferredRoles      String[]
+  preferredIndustries String[]
+  preferredLocations  String[]
+  workMode            String?
+  careerInterests     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Industry {
-  id              String   @id @default(uuid())
-  userId          String   @unique
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  companyName     String
-  description     String?
-  industryDomain  String?
-  website         String?
-  location        String?
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id             String  @id @default(uuid())
+  userId         String  @unique
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName    String
+  companyEmail   String?
+  phone          String?
+  website        String?
+  description    String?
+  industryDomain String?
+  companySize    String?
+
+  // Location
+  location String?
+  city     String?
+  state    String?
+  country  String?
+
+  // Recruiter
+  recruiterName  String?
+  recruiterEmail String?
+  recruiterPhone String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
